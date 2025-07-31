@@ -5,370 +5,1153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IELTS Reading Practice Test</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .hidden { display: none; }
-        .reading-passage {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        .question-group {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .question-prompt {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        .question-item {
-            margin: 15px 0;
-            padding: 12px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        select, input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
-        .mcq-options {
-            list-style-type: none;
+        * {
+            margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        .mcq-options li {
-            margin: 10px 0;
-            padding: 8px;
-            background-color: #f0f8ff;
-            border-radius: 4px;
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
         }
-        .navigation-container {
+
+        .header {
+            background-color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 60px;
         }
-        button {
-            padding: 12px 25px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
+
+        .timer-container {
+            display: flex;
+            position: relative;
+            cursor: default;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            align-items: center;
+        }
+
+        .timer-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+        }
+
+        .timer-controls button {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            padding: 0;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
         }
-        button:hover {
-            background-color: #2980b9;
+
+        .main-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            height: calc(100vh - 60px);
         }
-        button:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
+
+        .panels-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
         }
-        #progress-container {
-            width: 100%;
-            background-color: #ecf0f1;
+
+        .passage-panel {
+            flex: 1;
+            padding: 20px 20px 100px;
+            overflow-y: auto;
+            min-width: 200px;
+        }
+
+        .questions-panel {
+            flex: 1;
+            padding: 20px 20px 100px;
+            overflow-y: auto;
+            min-width: 200px;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .resizer {
+            width: 10px;
+            cursor: col-resize;
+            background-color: #f0f0f0;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        .part-header {
+            background-color: #f1f2ec;
+            padding: 15px 20px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            margin: 10px 20px;
             border-radius: 5px;
-            margin-bottom: 30px;
         }
-        #progress-bar {
-            height: 10px;
-            background-color: #3498db;
-            border-radius: 5px;
-            width: 33%;
-            transition: width 0.5s ease;
+
+        .question {
+            margin-bottom: 40px;
         }
-        .timer {
-            text-align: right;
-            font-weight: bold;
-            color: #e74c3c;
+
+        .question-prompt {
             margin-bottom: 20px;
         }
+
+        .answer-input {
+            border: 1px solid #888;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 2px 5px;
+            font-size: 16px;
+            text-align: center;
+            margin-right: 4px;
+            margin-left: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .answer-input.active-input {
+            border-color: #4a90e2;
+            box-shadow: 0 0 3px 1px rgba(74, 144, 226, 0.5);
+        }
+
+        .tf-question {
+            margin-bottom: 25px;
+            padding: 10px 0px;
+        }
+
+        .tf-question-line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 5px 0px;
+        }
+
+        .tf-question-number {
+            border: 2px solid #ccc;
+            padding: 2px 8px;
+            margin-right: 10px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .tf-options {
+            padding-left: 5px;
+        }
+
+        .tf-option {
+            display: block;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .tf-option input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .paragraph-matching-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .nav-row {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            height: 80px;
+            z-index: 100;
+        }
+
+        .footer__questionWrapper___1tZ46 {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .footer__questionNo___3WNct {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer__subquestionWrapper___9GgoP {
+            display: none;
+            gap: 2px;
+            margin-left: 10px;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP {
+            display: flex;
+        }
+
+        .subQuestion {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ccc;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        .subQuestion.active {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+
+        .footer__deliverButton___3FM07 {
+            margin-left: auto;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
         .highlight {
-            background-color: #fffde7;
-            padding: 2px 4px;
+            background-color: #ffe066;
+            border-radius: 2px;
+            padding: 0 2px;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        .nav-arrows {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-arrow:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <div class="timer">Time remaining: <span id="time">60:00</span></div>
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-
-    <h2>IELTS Academic Reading Practice Test</h2>
-
-    <!-- Passage 1 -->
-    <div id="passage-text-1" class="reading-passage">
-        <h3>The Invention of the Printing Press</h3>
-        <p>The printing press, invented by Johannes Gutenberg in the mid-15th century, revolutionized the way information was shared in Europe. Before this invention, books were painstakingly copied by hand, making them rare and expensive. Gutenberg's innovation combined several existing technologies: movable type, oil-based ink, and a modified wine press.</p>
-        
-        <p>The first major book printed using this system was the Gutenberg Bible in 1455. This 42-line Bible marked the beginning of the "Gutenberg Revolution" and the era of mass communication. The printing press enabled the rapid spread of Renaissance ideas, scientific discoveries, and religious reforms across Europe.</p>
-        
-        <p>Historians estimate that by 1500, printing presses in operation throughout Western Europe had already produced more than twenty million volumes. This technological advancement played a key role in the development of the Renaissance, Reformation, and the Scientific Revolution.</p>
-    </div>
-
-    <!-- Questions for Passage 1 -->
-    <div class="question-group" data-q-start="1" data-q-end="7">
-        <div class="question-prompt">
-            <p>Questions 1-7</p>
-            <p>Do the following statements agree with the information given in the passage?</p>
-            <p>Write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-        </div>
-        
-        <div class="question-item">
-            <p>1. The printing press made books more widely available.</p>
-            <select class="answer-dropdown">
-                <option value="">Select answer</option>
-                <option value="true">TRUE</option>
-                <option value="false">FALSE</option>
-                <option value="not-given">NOT GIVEN</option>
-            </select>
-        </div>
-        
-        <div class="question-item">
-            <p>2. Gutenberg invented movable type.</p>
-            <select class="answer-dropdown">
-                <option value="">Select answer</option>
-                <option value="true">TRUE</option>
-                <option value="false">FALSE</option>
-                <option value="not-given">NOT GIVEN</option>
-            </select>
-        </div>
-        
-        <!-- Additional questions 3-7 -->
-        <div class="question-item">
-            <p>3. The first printed book was a scientific text.</p>
-            <select class="answer-dropdown">
-                <option value="">Select answer</option>
-                <option value="true">TRUE</option>
-                <option value="false">FALSE</option>
-                <option value="not-given">NOT GIVEN</option>
-            </select>
-        </div>
-        
-        <div class="question-item">
-            <p>4. By 1500, Europe had printed over 20 million books.</p>
-            <select class="answer-dropdown">
-                <option value="">Select answer</option>
-                <option value="true">TRUE</option>
-                <option value="false">FALSE</option>
-                <option value="not-given">NOT GIVEN</option>
-            </select>
+    <div class="header">
+        <div class="timer-container">
+            <span class="timer-display">60:00</span>
+            <div class="timer-controls">
+                <button id="timer-toggle-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                </button>
+                <button id="timer-reset-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="question-group" data-q-start="8" data-q-end="13">
-        <div class="question-prompt">
-            <p>Questions 8-13</p>
-            <p>Complete the summary below using words from the passage.</p>
+    <div class="main-container" id="main-container">
+        <div id="passage-header-container">
+            <div id="part-header-1" class="part-header">
+                <p><strong>SECTION 1</strong></p>
+                <p>Read the text and answer Questions 1-10.</p>
+            </div>
+            <div id="part-header-2" class="part-header hidden">
+                <p><strong>SECTION 2</strong></p>
+                <p>Read the text and answer Questions 11-20.</p>
+            </div>
+            <div id="part-header-3" class="part-header hidden">
+                <p><strong>SECTION 3</strong></p>
+                <p>Read the text and answer Questions 21-30.</p>
+            </div>
+            <div id="part-header-4" class="part-header hidden">
+                <p><strong>SECTION 4</strong></p>
+                <p>Read the text and answer Questions 31-40.</p>
+            </div>
         </div>
-        
-        <div class="question-item">
-            <p>The printing press, invented by <input type="text" size="15">, combined several existing technologies including <input type="text" size="15"> and a modified <input type="text" size="15">. The first major product of this invention was the <input type="text" size="15">, which had <input type="text" size="5"> lines per page.</p>
+        <div class="panels-container">
+            <div class="passage-panel" id="passage-panel">
+                <!-- SECTION 1 Passage -->
+                <div id="passage-text-1" class="reading-passage">
+                    <h4>Sailing Courses</h4>
+                    <table>
+                        <tr>
+                            <td colspan="2"><strong>Sailing Courses</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Example:</td>
+                            <td>There will be a Taster Day on <strong>22nd June</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Two-day course</strong></td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li>This covers basic techniques.</li>
+                                    <li>Children are always accompanied by their <strong>1......</strong></li>
+                                    <li>Cost: <strong>2 £......</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Five-day course</strong></td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li>Cost: £125</li>
+                                    <li>Children can sail alone from the third day onwards.</li>
+                                    <li>Children learn how to sail in different kinds of weather.</li>
+                                    <li>Children receive a <strong>3......</strong> on the last day.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clothing</strong></td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li>Children should wear warm clothes.</li>
+                                    <li>Children must wear <strong>4......</strong></li>
+                                    <li>Children are recommended to bring extra trousers which are <strong>5......</strong></li>
+                                    <li>Children are not allowed to wear <strong>6......</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional information</strong></td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li>Visitors can buy a <strong>7......</strong> in the Marina Stores.</li>
+                                    <li>There is a free car park next to the <strong>8......</strong></li>
+                                    <li>Send the registration form two weeks before the course.</li>
+                                    <li>Remember to include the name of Jacob's <strong>9......</strong></li>
+                                    <li>There is an optional form giving permission to take <strong>10......</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- SECTION 2 Passage -->
+                <div id="passage-text-2" class="reading-passage hidden">
+                    <h4>Stanley Island Information</h4>
+                    <p>Stanley Island is a popular tourist destination with various facilities and attractions spread across different coastal areas. Visitors should be aware of certain practical considerations when planning their trip.</p>
+                    
+                    <p>The island can currently be reached by specific transportation methods. The North Coast is known for its golf courses, while the South Coast features family-friendly hotels. Self-catering accommodation is available on the East Coast, which also offers excellent opportunities for nature walks.</p>
+                    
+                    <p>Visitors are advised to bring certain essential items and be cautious of local wildlife. There are also some restrictions on technology use in certain areas of the island, and visitors should be mindful of what they consume.</p>
+                </div>
+
+                <!-- SECTION 3 Passage -->
+                <div id="passage-text-3" class="reading-passage hidden">
+                    <h4>Research on Absence from Work</h4>
+                    <p>Laura is conducting research on employee absence patterns at Burcock Engineering. She chose this company based on specific connections and is investigating various aspects of worker absence.</p>
+                    
+                    <p>Her research aims to examine the relationship between absence rates and types of work, and she has particular expectations about what she might discover. The company has agreed to provide certain employee information from their records.</p>
+                    
+                    <p>Laura is developing a questionnaire as part of her research methodology. Her tutor has made specific recommendations about how to structure this questionnaire, and Laura plans to include certain explanations in her covering letter to participants.</p>
+                    
+                    <p>The research process involves several key activities with specific timelines, some of which have already been scheduled.</p>
+                </div>
+
+                <!-- SECTION 4 Passage -->
+                <div id="passage-text-4" class="reading-passage hidden">
+                    <h4>Transhumance</h4>
+                    <p>Transhumance refers to the seasonal movement of people with their livestock between fixed summer and winter pastures. There are two main types of transhumance: fixed and nomadic.</p>
+                    
+                    <p>Fixed transhumance is practiced mainly in countries with predictable seasons, such as Switzerland, while nomadic transhumance occurs in areas with unpredictable climatic conditions, like Somalia. These two types differ significantly in their patterns of movement, living arrangements, and social organization.</p>
+                    
+                    <p>The study of pastoralist movements reveals distinct patterns for each type. Fixed transhumance follows a regular, predictable route, while nomadic transhumance involves more complex and varied movements.</p>
+                    
+                    <p>Differences are also evident in terms of housing structures, the number of people involved in the migrations, and economic practices. Research in Algeria has uncovered specific details about local transhumance practices, including timing, shelter types, and appropriate terminology.</p>
+                </div>
+            </div>
+            
+            <div class="resizer" id="resizer"></div>
+            
+            <div class="questions-panel" id="questions-panel">
+                <!-- SECTION 1 Questions -->
+                <div id="questions-1" class="question-set">
+                    <div class="question" data-q-start="1" data-q-end="10">
+                        <div class="question-prompt">
+                            <p><strong>Questions 1-10</strong><br>
+                            Complete the form below.<br>
+                            Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                        </div>
+                        
+                        <div class="question">
+                            <p>1. Children are always accompanied by their <input type="text" class="answer-input" id="q1" placeholder="1" size="15"></p>
+                            <p>2. Cost: £<input type="text" class="answer-input" id="q2" placeholder="2" size="15"></p>
+                            <p>3. Children receive a <input type="text" class="answer-input" id="q3" placeholder="3" size="15"> on the last day.</p>
+                            <p>4. Children must wear <input type="text" class="answer-input" id="q4" placeholder="4" size="15"></p>
+                            <p>5. Children are recommended to bring extra trousers which are <input type="text" class="answer-input" id="q5" placeholder="5" size="15"></p>
+                            <p>6. Children are not allowed to wear <input type="text" class="answer-input" id="q6" placeholder="6" size="15"></p>
+                            <p>7. Visitors can buy a <input type="text" class="answer-input" id="q7" placeholder="7" size="15"> in the Marina Stores.</p>
+                            <p>8. There is a free car park next to the <input type="text" class="answer-input" id="q8" placeholder="8" size="15"></p>
+                            <p>9. Remember to include the name of Jacob's <input type="text" class="answer-input" id="q9" placeholder="9" size="15"></p>
+                            <p>10. There is an optional form giving permission to take <input type="text" class="answer-input" id="q10" placeholder="10" size="15"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2 Questions -->
+                <div id="questions-2" class="question-set hidden">
+                    <div class="question" data-q-start="11" data-q-end="11">
+                        <div class="question-prompt">
+                            <p><strong>Question 11</strong><br>
+                            Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                            <p>11. At the present time, Stanley Island can be reached by</p>
+                        </div>
+                        <div class="tf-options">
+                            <label class="tf-option"><input type="radio" name="q11" value="A"> A. hovercraft</label>
+                            <label class="tf-option"><input type="radio" name="q11" value="B"> B. plane</label>
+                            <label class="tf-option"><input type="radio" name="q11" value="C"> C. ferry</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-q-start="12" data-q-end="15">
+                        <div class="question-prompt">
+                            <p><strong>Questions 12-15</strong><br>
+                            Where can the following facilities and attractions be found?<br>
+                            Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, next to questions 12-15.</p>
+                            <p><strong>A</strong> The North Coast<br>
+                            <strong>B</strong> The South Coast<br>
+                            <strong>C</strong> The East Coast</p>
+                        </div>
+                        
+                        <div class="paragraph-matching-question">
+                            <span>12. golf courses</span>
+                            <select class="answer-input" id="q12">
+                                <option value=""></option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                        <div class="paragraph-matching-question">
+                            <span>13. family hotels</span>
+                            <select class="answer-input" id="q13">
+                                <option value=""></option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                        <div class="paragraph-matching-question">
+                            <span>14. self-catering flats</span>
+                            <select class="answer-input" id="q14">
+                                <option value=""></option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                        <div class="paragraph-matching-question">
+                            <span>15. nature walks</span>
+                            <select class="answer-input" id="q15">
+                                <option value=""></option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question" data-q-start="16" data-q-end="20">
+                        <div class="question-prompt">
+                            <p><strong>Questions 16-20</strong><br>
+                            Complete the notes below.<br>
+                            Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+                            <p><strong>Advice to Visitors</strong></p>
+                        </div>
+                        
+                        <p>Bring your own <input type="text" class="answer-input" id="q16" placeholder="16" size="15"> and insect spray</p>
+                        <p>• It may not be possible to use your <input type="text" class="answer-input" id="q17" placeholder="17" size="15"> in the western area.</p>
+                        <p>• Don't drink water from <input type="text" class="answer-input" id="q18" placeholder="18" size="15"></p>
+                        <p>• Be careful of the <input type="text" class="answer-input" id="q19" placeholder="19" size="15"> as they bite</p>
+                        <p>• Try the local <input type="text" class="answer-input" id="q20" placeholder="20" size="15"></p>
+                    </div>
+                </div>
+
+                <!-- SECTION 3 Questions -->
+                <div id="questions-3" class="question-set hidden">
+                    <div class="question" data-q-start="21" data-q-end="24">
+                        <div class="question-prompt">
+                            <p><strong>Questions 21-24</strong><br>
+                            Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                        </div>
+                        
+                        <div class="tf-question" data-q-start="21" data-q-end="21">
+                            <div class="tf-question-line">
+                                <span class="tf-question-number">21</span>
+                                <span class="tf-question-text">Laura chose Burcock Engineering for her research because</span>
+                            </div>
+                            <div class="tf-options">
+                                <label class="tf-option"><input type="radio" name="q21" value="A"> A. she was contacted by the managing director.</label>
+                                <label class="tf-option"><input type="radio" name="q21" value="B"> B. she knew several people who worked there.</label>
+                                <label class="tf-option"><input type="radio" name="q21" value="C"> C. she had already done a work placement there.</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-question" data-q-start="22" data-q-end="22">
+                            <div class="tf-question-line">
+                                <span class="tf-question-number">22</span>
+                                <span class="tf-question-text">What does Laura agree to do regarding the central theme of her research?</span>
+                            </div>
+                            <div class="tf-options">
+                                <label class="tf-option"><input type="radio" name="q22" value="A"> A. check it is relevant.</label>
+                                <label class="tf-option"><input type="radio" name="q22" value="B"> B. broaden the focus.</label>
+                                <label class="tf-option"><input type="radio" name="q22" value="C"> C. be more specific in her aims.</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-question" data-q-start="23" data-q-end="23">
+                            <div class="tf-question-line">
+                                <span class="tf-question-number">23</span>
+                                <span class="tf-question-text">What does Laura expect to find from her research?</span>
+                            </div>
+                            <div class="tf-options">
+                                <label class="tf-option"><input type="radio" name="q23" value="A"> A. Absence rates are related to the type of work done.</label>
+                                <label class="tf-option"><input type="radio" name="q23" value="B"> B. A lot of worker absence is actually unnecessary.</label>
+                                <label class="tf-option"><input type="radio" name="q23" value="C"> C. Employee absence rates are increasing.</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-question" data-q-start="24" data-q-end="24">
+                            <div class="tf-question-line">
+                                <span class="tf-question-number">24</span>
+                                <span class="tf-question-text">What employee information does the tutor think Laura will be able to obtain from company records?</span>
+                            </div>
+                            <div class="tf-options">
+                                <label class="tf-option"><input type="radio" name="q24" value="A"> A. dates of birth.</label>
+                                <label class="tf-option"><input type="radio" name="q24" value="B"> B. details of employment.</label>
+                                <label class="tf-option"><input type="radio" name="q24" value="C"> C. individual records of absence.</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question" data-q-start="25" data-q-end="26">
+                        <div class="question-prompt">
+                            <p><strong>Questions 25 and 26</strong><br>
+                            Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                            <p>Which <strong>TWO</strong> recommendations does the tutor make about Laura's questionnaire?</p>
+                        </div>
+                        
+                        <div class="tf-options">
+                            <label class="tf-option"><input type="checkbox" name="q25-26" value="A"> A. Leave a space for contact details.</label>
+                            <label class="tf-option"><input type="checkbox" name="q25-26" value="B"> B. Specify a completion date.</label>
+                            <label class="tf-option"><input type="checkbox" name="q25-26" value="C"> C. Provide a mixture of question types.</label>
+                            <label class="tf-option"><input type="checkbox" name="q25-26" value="D"> D. Keep the length to a minimum.</label>
+                            <label class="tf-option"><input type="checkbox" name="q25-26" value="E"> E. Trial it on someone before finalising it.</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-q-start="27" data-q-end="28">
+                        <div class="question-prompt">
+                            <p><strong>Questions 27 and 28</strong><br>
+                            Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                            <p>Which <strong>TWO</strong> things will Laura explain in her covering letter to participants?</p>
+                        </div>
+                        
+                        <div class="tf-options">
+                            <label class="tf-option"><input type="checkbox" name="q27-28" value="A"> A. when the questionnaire should be completed</label>
+                            <label class="tf-option"><input type="checkbox" name="q27-28" value="B"> B. the fact that participation in the survey is voluntary</label>
+                            <label class="tf-option"><input type="checkbox" name="q27-28" value="C"> C. how long the questionnaire is likely to take</label>
+                            <label class="tf-option"><input type="checkbox" name="q27-28" value="D"> D. the purpose of the survey</label>
+                            <label class="tf-option"><input type="checkbox" name="q27-28" value="E"> E. the benefits of participation in the survey</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-q-start="29" data-q-end="30">
+                        <div class="question-prompt">
+                            <p><strong>Questions 29 and 30</strong><br>
+                            Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                            <p>Which <strong>TWO</strong> activities does Laura already have definite dates for?</p>
+                        </div>
+                        
+                        <div class="tf-options">
+                            <label class="tf-option"><input type="checkbox" name="q29-30" value="A"> A. completion of her finished assignment</label>
+                            <label class="tf-option"><input type="checkbox" name="q29-30" value="B"> B. questionnaire distribution</label>
+                            <label class="tf-option"><input type="checkbox" name="q29-30" value="C"> C. collection of completed questionnaires</label>
+                            <label class="tf-option"><input type="checkbox" name="q29-30" value="D"> D. the next meeting with her tutor</label>
+                            <label class="tf-option"><input type="checkbox" name="q29-30" value="E"> E. analysis of figures from the company's database</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4 Questions -->
+                <div id="questions-4" class="question-set hidden">
+                    <div class="question" data-q-start="31" data-q-end="40">
+                        <div class="question-prompt">
+                            <p><strong>Questions 31-40</strong><br>
+                            Complete the notes below.<br>
+                            Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                            <p><strong>Transhumance</strong></p>
+                        </div>
+                        
+                        <p><strong>Two Types of Transhumance</strong></p>
+                        <p>- fixed: mainly in countries with predictable seasons, e.g. Switzerland</p>
+                        <p>- nomadic: in areas with unpredictable climatic conditions, e.g. Somalia</p>
+                        
+                        <p><strong>Study on the Movement of Pastoralists</strong></p>
+                        <p>- for fixed transhumance, the pattern of movement is described as <input type="text" class="answer-input" id="q31" placeholder="31" size="15"></p>
+                        <p>- while for nomadic transhumance, the pattern is more complex and varied</p>
+                        
+                        <p><strong>Differences in terms of Homes</strong></p>
+                        <p>- fixed transhumance live in a semi-permanent shelter on high ground such as <input type="text" class="answer-input" id="q32" placeholder="32" size="15"></p>
+                        <p>- nomadic transhumance always stay in portable shelters, e.g. homes of the Gabra people carried on <input type="text" class="answer-input" id="q33" placeholder="33" size="15"></p>
+                        
+                        <p><strong>Number of People Involved</strong></p>
+                        <p>- for fixed transhumance, only <input type="text" class="answer-input" id="q34" placeholder="34" size="15"> pastoralists make the journey</p>
+                        <p>- however, all nomadic transhumance migrate with their livestock</p>
+                        
+                        <p><strong>Diet and Goods</strong></p>
+                        <p>- people who do not leave the valleys may become <input type="text" class="answer-input" id="q35" placeholder="35" size="15"></p>
+                        <p>- exchange animals with other communities for <input type="text" class="answer-input" id="q36" placeholder="36" size="15"></p>
+                        <p>- herds provide all needs-food and <input type="text" class="answer-input" id="q37" placeholder="37" size="15"></p>
+                        
+                        <p><strong>Research in Algeria in North Africa</strong></p>
+                        <p>- they traditionally arrive in time to help local residents with the <input type="text" class="answer-input" id="q38" placeholder="38" size="15"></p>
+                        <p>- their homes are <input type="text" class="answer-input" id="q39" placeholder="39" size="15"> which are temporary shelters</p>
+                        <p>- a better term to describe this type of transhumance might be <input type="text" class="answer-input" id="q40" placeholder="40" size="15"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Passage 2 (hidden initially) -->
-    <div id="passage-text-2" class="reading-passage hidden">
-        <h3>The Digital Revolution</h3>
-        <p>The late 20th century saw the beginning of another information revolution with the advent of digital technology. The development of personal computers in the 1970s and 1980s, followed by the creation of the World Wide Web in 1989, transformed how people access and share information.</p>
-        
-        <p>Digital storage has made information more accessible than ever before. A single terabyte hard drive can store the equivalent of approximately 1.5 million books. The internet has enabled instant global communication, making geographical distance virtually irrelevant for information exchange.</p>
-        
-        <p>However, this digital revolution has also created new challenges. Issues of data privacy, information overload, and the digital divide between those with and without access to technology have become significant societal concerns. Additionally, the permanence of digital information raises questions about how future historians will process the vast amounts of data being created.</p>
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow" onclick="previousQuestion()" id="prevBtn">‹</button>
+        <button class="nav-arrow" onclick="nextQuestion()" id="nextBtn">›</button>
     </div>
 
-    <!-- Questions for Passage 2 -->
-    <div class="question-group hidden" data-q-start="14" data-q-end="20">
-        <div class="question-prompt">
-            <p>Questions 14-20</p>
-            <p>Choose the correct heading for each paragraph from the list of headings below.</p>
+    <!-- Bottom Navigation -->
+    <nav class="nav-row">
+        <div class="footer__questionWrapper___1tZ46 selected" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(1)">
+                <span>
+                    <span class="sectionNr" aria-hidden="true">1</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion" onclick="goToQuestion(1)">1</button>
+                <button class="subQuestion" onclick="goToQuestion(2)">2</button>
+                <button class="subQuestion" onclick="goToQuestion(3)">3</button>
+                <button class="subQuestion" onclick="goToQuestion(4)">4</button>
+                <button class="subQuestion" onclick="goToQuestion(5)">5</button>
+                <button class="subQuestion" onclick="goToQuestion(6)">6</button>
+                <button class="subQuestion" onclick="goToQuestion(7)">7</button>
+                <button class="subQuestion" onclick="goToQuestion(8)">8</button>
+                <button class="subQuestion" onclick="goToQuestion(9)">9</button>
+                <button class="subQuestion" onclick="goToQuestion(10)">10</button>
+            </div>
         </div>
         
-        <div class="question-item">
-            <p>14. Paragraph 1</p>
-            <select class="answer-dropdown">
-                <option value="">Select heading</option>
-                <option value="i">i. The origins of digital technology</option>
-                <option value="ii">ii. Comparing digital and print media</option>
-                <option value="iii">iii. The beginning of a new era</option>
-            </select>
+        <div class="footer__questionWrapper___1tZ46" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(2)">
+                <span>
+                    <span class="sectionNr" aria-hidden="true">2</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion" onclick="goToQuestion(11)">11</button>
+                <                <button class="subQuestion" onclick="goToQuestion(12)">12</button>
+                <button class="subQuestion" onclick="goToQuestion(13)">13</button>
+                <button class="subQuestion" onclick="goToQuestion(14)">14</button>
+                <button class="subQuestion" onclick="goToQuestion(15)">15</button>
+                <button class="subQuestion" onclick="goToQuestion(16)">16</button>
+                <button class="subQuestion" onclick="goToQuestion(17)">17</button>
+                <button class="subQuestion" onclick="goToQuestion(18)">18</button>
+                <button class="subQuestion" onclick="goToQuestion(19)">19</button>
+                <button class="subQuestion" onclick="goToQuestion(20)">20</button>
+            </div>
         </div>
         
-        <div class="question-item">
-            <p>15. Paragraph 2</p>
-            <select class="answer-dropdown">
-                <option value="">Select heading</option>
-                <option value="i">i. Storage capacity advantages</option>
-                <option value="ii">ii. Problems with digital storage</option>
-                <option value="iii">iii. The future of information</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Passage 3 (hidden initially) -->
-    <div id="passage-text-3" class="reading-passage hidden">
-        <h3>The Future of Information Technology</h3>
-        <p>As we move further into the 21st century, several emerging technologies promise to transform how we interact with information. Artificial intelligence systems can now process and analyze data at speeds impossible for humans. Quantum computing, though still in its infancy, may eventually solve complex problems in seconds that would take current supercomputers years.</p>
-        
-        <p>One significant development is the growth of augmented reality (AR) technology. AR overlays digital information onto the physical world, potentially changing how we learn and interact with our environment. For instance, medical students might practice surgeries on virtual patients, or historians could walk through digitally reconstructed ancient cities.</p>
-        
-        <p>However, these advancements come with ethical considerations. The same technologies that can cure diseases might also be weaponized. The collection of personal data by corporations raises privacy concerns. As technology continues to advance, society will need to balance innovation with regulation to ensure these tools benefit humanity as a whole.</p>
-    </div>
-
-    <!-- Questions for Passage 3 -->
-    <div class="question-group hidden" data-q-start="21" data-q-end="26">
-        <div class="question-prompt">
-            <p>Questions 21-26</p>
-            <p>Choose the correct letter, A, B, C or D.</p>
+        <div class="footer__questionWrapper___1tZ46" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(3)">
+                <span>
+                    <span class="sectionNr" aria-hidden="true">3</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion" onclick="goToQuestion(21)">21</button>
+                <button class="subQuestion" onclick="goToQuestion(22)">22</button>
+                <button class="subQuestion" onclick="goToQuestion(23)">23</button>
+                <button class="subQuestion" onclick="goToQuestion(24)">24</button>
+                <button class="subQuestion" onclick="goToQuestion(25)">25</button>
+                <button class="subQuestion" onclick="goToQuestion(26)">26</button>
+                <button class="subQuestion" onclick="goToQuestion(27)">27</button>
+                <button class="subQuestion" onclick="goToQuestion(28)">28</button>
+                <button class="subQuestion" onclick="goToQuestion(29)">29</button>
+                <button class="subQuestion" onclick="goToQuestion(30)">30</button>
+            </div>
         </div>
         
-        <div class="question-item">
-            <p>21. What is the main advantage of quantum computing mentioned in the passage?</p>
-            <ul class="mcq-options">
-                <li><input type="radio" name="q21" value="a"> A. It uses less electricity</li>
-                <li><input type="radio" name="q21" value="b"> B. It solves problems faster</li>
-                <li><input type="radio" name="q21" value="c"> C. It is smaller in size</li>
-                <li><input type="radio" name="q21" value="d"> D. It is already widely available</li>
-            </ul>
+        <div class="footer__questionWrapper___1tZ46" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(4)">
+                <span>
+                    <span class="sectionNr" aria-hidden="true">4</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion" onclick="goToQuestion(31)">31</button>
+                <button class="subQuestion" onclick="goToQuestion(32)">32</button>
+                <button class="subQuestion" onclick="goToQuestion(33)">33</button>
+                <button class="subQuestion" onclick="goToQuestion(34)">34</button>
+                <button class="subQuestion" onclick="goToQuestion(35)">35</button>
+                <button class="subQuestion" onclick="goToQuestion(36)">36</button>
+                <button class="subQuestion" onclick="goToQuestion(37)">37</button>
+                <button class="subQuestion" onclick="goToQuestion(38)">38</button>
+                <button class="subQuestion" onclick="goToQuestion(39)">39</button>
+                <button class="subQuestion" onclick="goToQuestion(40)">40</button>
+            </div>
         </div>
         
-        <div class="question-item">
-            <p>22. According to the passage, how might augmented reality benefit medical students?</p>
-            <ul class="mcq-options">
-                <li><input type="radio" name="q22" value="a"> A. By reducing tuition costs</li>
-                <li><input type="radio" name="q22" value="b"> B. Through virtual surgery practice</li>
-                <li><input type="radio" name="q22" value="c"> C. By automating diagnoses</li>
-                <li><input type="radio" name="q22" value="d"> D. Through remote patient monitoring</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Navigation and Submission -->
-    <div class="navigation-container">
-        <button id="prev-btn" disabled>Previous</button>
-        <button id="next-btn">Next</button>
-        <button id="submit-btn" class="hidden">Submit Test</button>
-    </div>
+        <button id="deliver-button" class="footer__deliverButton___3FM07">
+            <span>Check Answers</span>
+        </button>
+    </nav>
 
     <script>
-        // Test configuration
-        const testDuration = 60 * 60; // 60 minutes in seconds
-        let timeLeft = testDuration;
-        let currentPassage = 1;
-        const totalPassages = 3;
+    // --- STATE VARIABLES ---
+    let currentPassage = 1;
+    let currentQuestion = 1;
+    let timeInSeconds = 3600;
+    let timerInterval;
+    let activeQuestionElement = null;
+
+    // --- ANSWER KEY ---
+    const correctAnswers = {
+        '1': 'parent', '2': '85', '3': 'certificate', '4': 'lifejacket', 
+        '5': 'waterproof', '6': 'sandals', '7': 'map', '8': 'clubhouse', 
+        '9': 'doctor', '10': 'photos',
+        '11': 'C', '12': 'A', '13': 'B', '14': 'C', '15': 'C',
+        '16': 'suncream', '17': 'mobile phone', '18': 'streams', 
+        '19': 'mosquitoes', '20': 'honey',
+        '21': 'B', '22': 'A', '23': 'A', '24': 'C',
+        '25-26': ['D', 'E'], '27-28': ['B', 'D'], '29-30': ['B', 'D'],
+        '31': 'predictable', '32': 'mountains', '33': 'camels',
+        '34': 'some', '35': 'malnourished', '36': 'goods',
+        '37': 'clothing', '38': 'harvest', '39': 'tents',
+        '40': 'semi-nomadic'
+    };
+
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        startTimer();
+        switchToPart(1);
+        updateNavigation();
         
-        // DOM elements
-        const timeDisplay = document.getElementById('time');
-        const progressBar = document.getElementById('progress-bar');
-        const nextBtn = document.getElementById('next-btn');
-        const prevBtn = document.getElementById('prev-btn');
-        const submitBtn = document.getElementById('submit-btn');
+        document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
+        document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
+        document.getElementById('deliver-button').addEventListener('click', checkAnswers);
         
-        // Timer function
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            
-            if (timeLeft <= 0) {
-                endTest();
+        document.getElementById('resizer').addEventListener('mousedown', initResize);
+        
+        document.body.addEventListener('input', updateAllIndicators);
+        document.body.addEventListener('change', updateAllIndicators);
+    });
+
+    // --- TEST FUNCTIONS ---
+    function switchToPart(partNumber) {
+        currentPassage = partNumber;
+        document.querySelectorAll('.reading-passage, .question-set, .part-header, .footer__questionWrapper___1tZ46').forEach(el => {
+            el.classList.add('hidden');
+            el.classList.remove('selected');
+        });
+        
+        document.getElementById(`passage-text-${partNumber}`)?.classList.remove('hidden');
+        document.getElementById(`questions-${partNumber}`)?.classList.remove('hidden');
+        document.getElementById(`part-header-${partNumber}`)?.classList.remove('hidden');
+        document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${partNumber})`)?.classList.remove('hidden');
+        document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${partNumber})`)?.classList.add('selected');
+        
+        const firstQuestion = {1: 1, 2: 11, 3: 21, 4: 31}[partNumber];
+        goToQuestion(firstQuestion);
+    }
+
+    function goToQuestion(questionNumber) {
+        currentQuestion = questionNumber;
+        
+        if (activeQuestionElement) {
+            activeQuestionElement.classList.remove('active-question', 'active-input');
+        }
+        
+        // Find the input element for this question
+        let targetEl = document.getElementById(`q${questionNumber}`);
+        
+        // For radio/checkbox questions, find the container
+        if (!targetEl) {
+            targetEl = document.querySelector(`[name="q${questionNumber}"]`)?.closest('.tf-question') || 
+                      document.querySelector(`[name="q${questionNumber}"]`)?.closest('.question');
+        }
+        
+        // For questions 25-30 which have grouped names
+        if (!targetEl && questionNumber >= 25 && questionNumber <= 30) {
+            const groupName = questionNumber <= 26 ? 'q25-26' : 
+                            (questionNumber <= 28 ? 'q27-28' : 'q29-30');
+            targetEl = document.querySelector(`[name="${groupName}"]`)?.closest('.question');
+        }
+        
+        if (targetEl) {
+            activeQuestionElement = targetEl;
+            if (targetEl.matches('input, select')) {
+                targetEl.classList.add('active-input');
+                targetEl.focus();
             } else {
-                timeLeft--;
-                setTimeout(updateTimer, 1000);
+                targetEl.classList.add('active-question');
+            }
+            scrollIntoViewIfNeeded(targetEl);
+        }
+        
+        updateNavigation();
+    }
+
+    function scrollIntoViewIfNeeded(element) {
+        const panel = element.closest('.questions-panel, .passage-panel');
+        const panelRect = panel.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
+        
+        if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function updateNavigation() {
+        document.querySelectorAll('.subQuestion').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.querySelector(`.subQuestion[onclick="goToQuestion(${currentQuestion})"]`)?.classList.add('active');
+        
+        document.getElementById('prevBtn').disabled = currentQuestion === 1;
+        document.getElementById('nextBtn').disabled = currentQuestion === 40;
+        
+        // Update which part is active based on current question
+        let activePart = 1;
+        if (currentQuestion >= 11 && currentQuestion <= 20) activePart = 2;
+        else if (currentQuestion >= 21 && currentQuestion <= 30) activePart = 3;
+        else if (currentQuestion >= 31) activePart = 4;
+        
+        document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => {
+            wrapper.classList.toggle('selected', index + 1 === activePart);
+        });
+    }
+
+    function previousQuestion() {
+        if (currentQuestion > 1) {
+            goToQuestion(currentQuestion - 1);
+        }
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < 40) {
+            goToQuestion(currentQuestion + 1);
+        }
+    }
+
+    // --- TIMER FUNCTIONS ---
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            timeInSeconds--;
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            document.querySelector('.timer-display').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeInSeconds <= 0) {
+                clearInterval(timerInterval);
+                document.querySelector('.timer-display').textContent = "Time's up!";
+            }
+        }, 1000);
+        document.getElementById('timer-toggle-btn').innerHTML = 
+            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        document.getElementById('timer-toggle-btn').innerHTML = 
+            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+    }
+
+    function toggleTimer() {
+        if (timerInterval) {
+            pauseTimer();
+        } else {
+            startTimer();
+        }
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        timeInSeconds = 3600;
+        document.querySelector('.timer-display').textContent = '60:00';
+    }
+
+    // --- ANSWER CHECKING ---
+    function checkAnswers() {
+        pauseTimer();
+        let score = 0;
+        
+        // Clear previous markings
+        document.querySelectorAll('.correct, .incorrect').forEach(el => {
+            el.classList.remove('correct', 'incorrect');
+        });
+        
+        // Check each question
+        for (let qNum = 1; qNum <= 40; qNum++) {
+            const correctAnswer = correctAnswers[qNum];
+            let userAnswer = '';
+            let isCorrect = false;
+            
+            // Handle different question types
+            if (qNum >= 25 && qNum <= 30) {
+                // Grouped checkbox questions (25-26, 27-28, 29-30)
+                const groupName = qNum <= 26 ? 'q25-26' : 
+                                (qNum <= 28 ? 'q27-28' : 'q29-30');
+                const checkedBoxes = Array.from(document.querySelectorAll(`input[name="${groupName}"]:checked`))
+                    .map(el => el.value);
+                isCorrect = arraysEqual(checkedBoxes.sort(), correctAnswer.sort());
+                
+                // Mark all checkboxes in group
+                document.querySelectorAll(`input[name="${groupName}"]`).forEach(el => {
+                    const container = el.closest('.tf-option');
+                    if (correctAnswer.includes(el.value)) {
+                        container.classList.add('correct');
+                    } else if (el.checked && !correctAnswer.includes(el.value)) {
+                        container.classList.add('incorrect');
+                    }
+                });
+                
+                if (isCorrect) score += 2; // Each grouped question is worth 2 points
+            } else {
+                // Single answer questions
+                const inputEl = document.getElementById(`q${qNum}`);
+                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
+                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
+                
+                if (inputEl) {
+                    userAnswer = inputEl.value.trim().toLowerCase();
+                    isCorrect = userAnswer === correctAnswer.toLowerCase();
+                    if (isCorrect) {
+                        inputEl.classList.add('correct');
+                        score++;
+                    } else if (userAnswer) {
+                        inputEl.classList.add('incorrect');
+                    }
+                } else if (radioEl) {
+                    userAnswer = radioEl.value;
+                    isCorrect = userAnswer === correctAnswer;
+                    const container = radioEl.closest('.tf-option');
+                    if (isCorrect) {
+                        container.classList.add('correct');
+                        score++;
+                    } else if (userAnswer) {
+                        container.classList.add('incorrect');
+                    }
+                } else if (selectEl) {
+                    userAnswer = selectEl.value;
+                    isCorrect = userAnswer === correctAnswer;
+                    if (isCorrect) {
+                        selectEl.classList.add('correct');
+                        score++;
+                    } else if (userAnswer) {
+                        selectEl.classList.add('incorrect');
+                    }
+                }
             }
         }
         
-        // Navigation functions
-        function showPassage(passageNum) {
-            // Hide all passages and questions
-            document.querySelectorAll('.reading-passage, .question-group').forEach(el => {
-                el.classList.add('hidden');
-            });
-            
-            // Show current passage and questions
-            document.getElementById(`passage-text-${passageNum}`).classList.remove('hidden');
-            document.querySelector(`.question-group[data-q-start="${passageNum === 1 ? '1' : passageNum === 2 ? '14' : '21'}"`).classList.remove('hidden');
-            
-            // Update buttons
-            prevBtn.disabled = passageNum === 1;
-            nextBtn.disabled = passageNum === totalPassages;
-            submitBtn.classList.toggle('hidden', passageNum !== totalPassages);
-            
-            // Update progress bar
-            progressBar.style.width = `${(passageNum / totalPassages) * 100}%`;
-        }
+        // Show results
+        alert(`You scored ${score} out of 40.`);
         
-        function endTest() {
-            alert('Time is up! Your answers will be submitted automatically.');
-            submitAnswers();
-        }
-        
-        function submitAnswers() {
-            // In a real implementation, this would collect all answers and send to a server
-            console.log('Answers submitted!');
-            // Disable all inputs
-            document.querySelectorAll('select, input').forEach(el => {
-                el.disabled = true;
-            });
-            // Disable navigation
-            nextBtn.disabled = true;
-            prevBtn.disabled = true;
-            submitBtn.disabled = true;
-            
-            // Show results (in a real app, this would come from server)
-            alert('Test submitted! This would show your results in a real application.');
-        }
-        
-        // Event listeners
-        nextBtn.addEventListener('click', () => {
-            currentPassage++;
-            showPassage(currentPassage);
+        // Disable further answering
+        document.querySelectorAll('input, select').forEach(el => {
+            el.disabled = true;
         });
+        document.getElementById('deliver-button').disabled = true;
+    }
+
+    function arraysEqual(a, b) {
+        if (a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    // --- PANEL RESIZING ---
+    function initResize(e) {
+        e.preventDefault();
+        const startX = e.clientX;
+        const startWidth = document.getElementById('passage-panel').offsetWidth;
         
-        prevBtn.addEventListener('click', () => {
-            currentPassage--;
-            showPassage(currentPassage);
-        });
-        
-        submitBtn.addEventListener('click', submitAnswers);
-        
-        // Initialize
-        updateTimer();
-        showPassage(1);
-        
-        // Highlight functionality (bonus feature)
-        document.addEventListener('mouseup', function() {
-            const selection = window.getSelection();
-            if (selection.toString().length > 0) {
-                const range = selection.getRangeAt(0);
-                const span = document.createElement('span');
-                span.className = 'highlight';
-                range.surroundContents(span);
+        function doDrag(e) {
+            const newWidth = startWidth + e.clientX - startX;
+            if (newWidth > 200 && (document.body.clientWidth - newWidth - 10) > 200) {
+                document.getElementById('passage-panel').style.flex = `0 0 ${newWidth}px`;
             }
-        });
+        }
+        
+        function stopDrag() {
+            window.removeEventListener('mousemove', doDrag, false);
+            window.removeEventListener('mouseup', stopDrag, false);
+        }
+        
+        window.addEventListener('mousemove', doDrag, false);
+        window.addEventListener('mouseup', stopDrag, false);
+    }
+
+    // --- ANSWER TRACKING ---
+    function updateAllIndicators() {
+        updateAnsweredIndicators();
+        updateAttemptedCounts();
+    }
+
+    function updateAnsweredIndicators() {
+        for (let qNum = 1; qNum <= 40; qNum++) {
+            const btn = document.querySelector(`.subQuestion[onclick="goToQuestion(${qNum})"]`);
+            if (!btn) continue;
+            
+            let isAnswered = false;
+            
+            // Handle different question types
+            if (qNum >= 25 && qNum <= 30) {
+                const groupName = qNum <= 26 ? 'q25-26' : 
+                                (qNum <= 28 ? 'q27-28' : 'q29-30');
+                isAnswered = document.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
+            } else {
+                const inputEl = document.getElementById(`q${qNum}`);
+                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
+                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
+                
+                isAnswered = (inputEl && inputEl.value.trim() !== '') || 
+                            radioEl || 
+                            (selectEl && selectEl.value !== '');
+            }
+            
+            btn.classList.toggle('answered', isAnswered);
+        }
+    }
+
+    function updateAttemptedCounts() {
+        const partCounts = {1: 0, 2: 0, 3: 0, 4: 0};
+        
+        for (let qNum = 1; qNum <= 40; qNum++) {
+            const part = qNum <= 10 ? 1 : 
+                        (qNum <= 20 ? 2 : 
+                        (qNum <= 30 ? 3 : 4));
+            
+            let isAnswered = false;
+            
+            if (qNum >= 25 && qNum <= 30) {
+                const groupName = qNum <= 26 ? 'q25-26' : 
+                                (qNum <= 28 ? 'q27-28' : 'q29-30');
+                isAnswered = document.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
+            } else {
+                const inputEl = document.getElementById(`q${qNum}`);
+                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
+                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
+                
+                isAnswered = (inputEl && inputEl.value.trim() !== '') || 
+                            radioEl || 
+                            (selectEl && selectEl.value !== '');
+            }
+            
+            if (isAnswered) partCounts[part]++;
+        }
+        
+        // Update counts for each part
+        for (let part = 1; part <= 4; part++) {
+            const countDisplay = document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${part}) .attemptedCount`);
+            if (countDisplay) {
+                countDisplay.textContent = `${partCounts[part]} of ${part === 4 ? 10 : 10}`;
+            }
+        }
+    }
     </script>
 </body>
 </html>
