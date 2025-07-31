@@ -19,9 +19,9 @@
         }
 
         .header {
-            background-color: #ffffff;
+            background-color: #1a5276;
             padding: 12px 20px;
-            border-bottom: 1px solid #e0e0e0;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -31,13 +31,14 @@
             right: 0;
             z-index: 100;
             height: 60px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .timer-container {
             display: flex;
             position: relative;
             cursor: default;
-            color: #333;
+            color: white;
             font-size: 16px;
             font-weight: 500;
             align-items: center;
@@ -51,8 +52,8 @@
         }
 
         .timer-controls button {
-            background: #f0f0f0;
-            border: 1px solid #ccc;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
             border-radius: 50%;
             padding: 0;
             cursor: pointer;
@@ -64,12 +65,20 @@
             transition: background-color 0.2s;
         }
 
+        .timer-controls button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .timer-controls button svg {
+            fill: white;
+        }
+
         .main-container {
             margin-top: 60px;
             display: flex;
             flex-direction: column;
             background: #ffffff;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 140px);
         }
 
         .panels-container {
@@ -80,88 +89,98 @@
 
         .passage-panel {
             flex: 1;
-            padding: 20px 20px 100px;
+            padding: 20px 20px 80px;
             overflow-y: auto;
             min-width: 200px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #e0e0e0;
         }
 
         .questions-panel {
             flex: 1;
-            padding: 20px 20px 100px;
+            padding: 20px 20px 80px;
             overflow-y: auto;
             min-width: 200px;
-            border-left: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
         }
 
         .resizer {
             width: 10px;
             cursor: col-resize;
-            background-color: #f0f0f0;
+            background-color: #e0e0e0;
             flex-shrink: 0;
             flex-grow: 0;
         }
 
         .part-header {
-            background-color: #f1f2ec;
+            background-color: #1a5276;
+            color: white;
             padding: 15px 20px;
-            border: 1px solid #e0e0e0;
             text-align: left;
-            margin: 10px 20px;
-            border-radius: 5px;
+            margin: 0;
+            border-radius: 0;
         }
 
         .question {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .question-prompt {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .answer-input {
-            border: 1px solid #888;
+            border: 1px solid #3498db;
             border-radius: 4px;
             background-color: #fff;
-            padding: 2px 5px;
+            padding: 5px 8px;
             font-size: 16px;
-            text-align: center;
-            margin-right: 4px;
-            margin-left: 4px;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .answer-input.active-input {
-            border-color: #4a90e2;
-            box-shadow: 0 0 3px 1px rgba(74, 144, 226, 0.5);
+        .answer-input:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
         }
 
         .tf-question {
-            margin-bottom: 25px;
-            padding: 10px 0px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
         }
 
         .tf-question-line {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 5px 0px;
+            margin-bottom: 10px;
         }
 
         .tf-question-number {
-            border: 2px solid #ccc;
-            padding: 2px 8px;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 8px;
             margin-right: 10px;
             border-radius: 3px;
             font-weight: bold;
+            min-width: 30px;
+            text-align: center;
         }
 
         .tf-options {
-            padding-left: 5px;
+            padding-left: 15px;
         }
 
         .tf-option {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -169,7 +188,7 @@
 
         .tf-option input[type="radio"] {
             margin-right: 10px;
-            transform: scale(1.2);
+            accent-color: #3498db;
         }
 
         .paragraph-matching-question {
@@ -177,7 +196,10 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
         }
 
         .nav-row {
@@ -185,12 +207,13 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: #ffffff;
+            background: #1a5276;
             padding: 0;
             display: flex;
             align-items: center;
             height: 80px;
             z-index: 100;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
         }
 
         .footer__questionWrapper___1tZ46 {
@@ -205,17 +228,24 @@
             padding: 10px 15px;
             font-size: 16px;
             font-weight: 600;
-            color: #333;
+            color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .footer__questionNo___3WNct:hover {
+            background-color: rgba(255,255,255,0.1);
         }
 
         .footer__subquestionWrapper___9GgoP {
             display: none;
-            gap: 2px;
+            gap: 5px;
             margin-left: 10px;
+            flex-wrap: wrap;
+            max-width: 300px;
         }
 
         .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP {
@@ -225,9 +255,9 @@
         .subQuestion {
             width: 32px;
             height: 32px;
-            border: 1px solid #ccc;
-            background: white;
-            color: #333;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
@@ -235,21 +265,29 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
-            border-radius: 2px;
+            border-radius: 4px;
+        }
+
+        .subQuestion:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         .subQuestion.active {
-            background-color: #4a90e2;
-            color: white;
-            border-color: #4a90e2;
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .subQuestion.answered {
+            background-color: rgba(46, 204, 113, 0.3);
+            border-color: rgba(46, 204, 113, 0.5);
         }
 
         .footer__deliverButton___3FM07 {
             margin-left: auto;
             margin-right: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-            border: 1px solid #ccc;
+            background-color: #3498db;
+            color: white;
+            border: none;
             padding: 12px 20px;
             border-radius: 4px;
             font-size: 16px;
@@ -258,6 +296,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .footer__deliverButton___3FM07:hover {
+            background-color: #2980b9;
         }
 
         .hidden {
@@ -275,14 +318,21 @@
             border-collapse: collapse;
             width: 100%;
             margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         table, th, td {
             border: 1px solid #ddd;
         }
 
+        th {
+            background-color: #1a5276;
+            color: white;
+        }
+
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
 
@@ -298,7 +348,7 @@
         .nav-arrow {
             width: 50px;
             height: 50px;
-            background: #333;
+            background: #3498db;
             color: white;
             border: none;
             cursor: pointer;
@@ -307,52 +357,93 @@
             justify-content: center;
             font-size: 22px;
             font-weight: bold;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+        }
+
+        .nav-arrow:hover {
+            background: #2980b9;
         }
 
         .nav-arrow:disabled {
-            background: #ccc;
+            background: #95a5a6;
             cursor: not-allowed;
+        }
+
+        .footer-credit {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+        }
+
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+        }
+
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+        }
+
+        #highlight-toolbar {
+            display: none;
+            position: absolute;
+            z-index: 9999;
+            background: #1a5276;
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 14px;
+        }
+
+        #highlight-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #highlight-btn:hover {
+            background: #2980b9;
         }
     </style>
 </head>
 <body>
+    <div id="highlight-toolbar">
+        <button id="highlight-btn">Highlight</button>
+    </div>
+
     <div class="header">
         <div class="timer-container">
             <span class="timer-display">60:00</span>
             <div class="timer-controls">
                 <button id="timer-toggle-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 </button>
                 <button id="timer-reset-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
                 </button>
             </div>
         </div>
+        <h3>IELTS Reading Practice Test</h3>
     </div>
 
     <div class="main-container" id="main-container">
-        <div id="passage-header-container">
-            <div id="part-header-1" class="part-header">
-                <p><strong>SECTION 1</strong></p>
-                <p>Read the text and answer Questions 1-10.</p>
-            </div>
-            <div id="part-header-2" class="part-header hidden">
-                <p><strong>SECTION 2</strong></p>
-                <p>Read the text and answer Questions 11-20.</p>
-            </div>
-            <div id="part-header-3" class="part-header hidden">
-                <p><strong>SECTION 3</strong></p>
-                <p>Read the text and answer Questions 21-30.</p>
-            </div>
-            <div id="part-header-4" class="part-header hidden">
-                <p><strong>SECTION 4</strong></p>
-                <p>Read the text and answer Questions 31-40.</p>
-            </div>
-        </div>
         <div class="panels-container">
             <div class="passage-panel" id="passage-panel">
                 <!-- SECTION 1 Passage -->
                 <div id="passage-text-1" class="reading-passage">
+                    <div class="part-header">
+                        <p><strong>SECTION 1</strong></p>
+                    </div>
                     <h4>Sailing Courses</h4>
                     <table>
                         <tr>
@@ -411,6 +502,9 @@
 
                 <!-- SECTION 2 Passage -->
                 <div id="passage-text-2" class="reading-passage hidden">
+                    <div class="part-header">
+                        <p><strong>SECTION 2</strong></p>
+                    </div>
                     <h4>Stanley Island Information</h4>
                     <p>Stanley Island is a popular tourist destination with various facilities and attractions spread across different coastal areas. Visitors should be aware of certain practical considerations when planning their trip.</p>
                     
@@ -421,6 +515,9 @@
 
                 <!-- SECTION 3 Passage -->
                 <div id="passage-text-3" class="reading-passage hidden">
+                    <div class="part-header">
+                        <p><strong>SECTION 3</strong></p>
+                    </div>
                     <h4>Research on Absence from Work</h4>
                     <p>Laura is conducting research on employee absence patterns at Burcock Engineering. She chose this company based on specific connections and is investigating various aspects of worker absence.</p>
                     
@@ -433,6 +530,9 @@
 
                 <!-- SECTION 4 Passage -->
                 <div id="passage-text-4" class="reading-passage hidden">
+                    <div class="part-header">
+                        <p><strong>SECTION 4</strong></p>
+                    </div>
                     <h4>Transhumance</h4>
                     <p>Transhumance refers to the seasonal movement of people with their livestock between fixed summer and winter pastures. There are two main types of transhumance: fixed and nomadic.</p>
                     
@@ -449,10 +549,12 @@
             <div class="questions-panel" id="questions-panel">
                 <!-- SECTION 1 Questions -->
                 <div id="questions-1" class="question-set">
+                    <div class="part-header">
+                        <p><strong>Questions 1-10</strong></p>
+                    </div>
                     <div class="question" data-q-start="1" data-q-end="10">
                         <div class="question-prompt">
-                            <p><strong>Questions 1-10</strong><br>
-                            Complete the form below.<br>
+                            <p>Complete the form below.<br>
                             Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
                         </div>
                         
@@ -473,6 +575,9 @@
 
                 <!-- SECTION 2 Questions -->
                 <div id="questions-2" class="question-set hidden">
+                    <div class="part-header">
+                        <p><strong>Questions 11-20</strong></p>
+                    </div>
                     <div class="question" data-q-start="11" data-q-end="11">
                         <div class="question-prompt">
                             <p><strong>Question 11</strong><br>
@@ -552,6 +657,9 @@
 
                 <!-- SECTION 3 Questions -->
                 <div id="questions-3" class="question-set hidden">
+                    <div class="part-header">
+                        <p><strong>Questions 21-30</strong></p>
+                    </div>
                     <div class="question" data-q-start="21" data-q-end="24">
                         <div class="question-prompt">
                             <p><strong>Questions 21-24</strong><br>
@@ -658,6 +766,9 @@
 
                 <!-- SECTION 4 Questions -->
                 <div id="questions-4" class="question-set hidden">
+                    <div class="part-header">
+                        <p><strong>Questions 31-40</strong></p>
+                    </div>
                     <div class="question" data-q-start="31" data-q-end="40">
                         <div class="question-prompt">
                             <p><strong>Questions 31-40</strong><br>
@@ -683,475 +794,415 @@
                         <p>- however, all nomadic transhumance migrate with their livestock</p>
                         
                         <p><strong>Diet and Goods</strong></p>
-                        <p>- people who do not leave the valleys may become <input type="text" class="answer-input" id="q35" placeholder="35" size="15"></p>
-                        <p>- exchange animals with other communities for <input type="text" class="answer-input" id="q36" placeholder="36" size="15"></p>
-                        <p>- herds provide all needs-food and <input type="text" class="answer-input" id="q37" placeholder="37" size="15"></p>
-                        
-                        <p><strong>Research in Algeria in North Africa</strong></p>
-                        <p>- they traditionally arrive in time to help local residents with the <input type="text" class="answer-input" id="q38" placeholder="38" size="15"></p>
-                        <p>- their homes are <input type="text" class="answer-input" id="q39" placeholder="39" size="15"> which are temporary shelters</p>
-                        <p>- a better term to describe this type of transhumance might be <input type="text" class="answer-input" id="q40" placeholder="40" size="15"></p>
+                        <p>- people who do not leave the valleys may become <input type="text" class="answer-input"                            <p>- people who do not leave the valleys may become <input type="text" class="answer-input" id="q35" placeholder="35" size="15"></p>
+                            <p>- exchange animals with other communities for <input type="text" class="answer-input" id="q36" placeholder="36" size="15"></p>
+                            <p>- herds provide all needs-food and <input type="text" class="answer-input" id="q37" placeholder="37" size="15"></p>
+                            
+                            <p><strong>Research in Algeria in North Africa</strong></p>
+                            <p>- they traditionally arrive in time to help local residents with the <input type="text" class="answer-input" id="q38" placeholder="38" size="15"></p>
+                            <p>- their homes are <input type="text" class="answer-input" id="q39" placeholder="39" size="15"> which are temporary shelters</p>
+                            <p>- a better term to describe this type of transhumance might be <input type="text" class="answer-input" id="q40" placeholder="40" size="15"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="nav-row">
+            <div class="footer__questionWrapper___1tZ46 selected" data-section="1">
+                <button class="footer__questionNo___3WNct">
+                    <span>Section 1</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="footer__subquestionWrapper___9GgoP">
+                    <div class="subQuestion active" data-q="1">1</div>
+                    <div class="subQuestion" data-q="2">2</div>
+                    <div class="subQuestion" data-q="3">3</div>
+                    <div class="subQuestion" data-q="4">4</div>
+                    <div class="subQuestion" data-q="5">5</div>
+                    <div class="subQuestion" data-q="6">6</div>
+                    <div class="subQuestion" data-q="7">7</div>
+                    <div class="subQuestion" data-q="8">8</div>
+                    <div class="subQuestion" data-q="9">9</div>
+                    <div class="subQuestion" data-q="10">10</div>
+                </div>
+            </div>
+            
+            <div class="footer__questionWrapper___1tZ46" data-section="2">
+                <button class="footer__questionNo___3WNct">
+                    <span>Section 2</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="footer__subquestionWrapper___9GgoP">
+                    <div class="subQuestion" data-q="11">11</div>
+                    <div class="subQuestion" data-q="12">12</div>
+                    <div class="subQuestion" data-q="13">13</div>
+                    <div class="subQuestion" data-q="14">14</div>
+                    <div class="subQuestion" data-q="15">15</div>
+                    <div class="subQuestion" data-q="16">16</div>
+                    <div class="subQuestion" data-q="17">17</div>
+                    <div class="subQuestion" data-q="18">18</div>
+                    <div class="subQuestion" data-q="19">19</div>
+                    <div class="subQuestion" data-q="20">20</div>
+                </div>
+            </div>
+            
+            <div class="footer__questionWrapper___1tZ46" data-section="3">
+                <button class="footer__questionNo___3WNct">
+                    <span>Section 3</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="footer__subquestionWrapper___9GgoP">
+                    <div class="subQuestion" data-q="21">21</div>
+                    <div class="subQuestion" data-q="22">22</div>
+                    <div class="subQuestion" data-q="23">23</div>
+                    <div class="subQuestion" data-q="24">24</div>
+                    <div class="subQuestion" data-q="25">25</div>
+                    <div class="subQuestion" data-q="26">26</div>
+                    <div class="subQuestion" data-q="27">27</div>
+                    <div class="subQuestion" data-q="28">28</div>
+                    <div class="subQuestion" data-q="29">29</div>
+                    <div class="subQuestion" data-q="30">30</div>
+                </div>
+            </div>
+            
+            <div class="footer__questionWrapper___1tZ46" data-section="4">
+                <button class="footer__questionNo___3WNct">
+                    <span>Section 4</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="footer__subquestionWrapper___9GgoP">
+                    <div class="subQuestion" data-q="31">31</div>
+                    <div class="subQuestion" data-q="32">32</div>
+                    <div class="subQuestion" data-q="33">33</div>
+                    <div class="subQuestion" data-q="34">34</div>
+                    <div class="subQuestion" data-q="35">35</div>
+                    <div class="subQuestion" data-q="36">36</div>
+                    <div class="subQuestion" data-q="37">37</div>
+                    <div class="subQuestion" data-q="38">38</div>
+                    <div class="subQuestion" data-q="39">39</div>
+                    <div class="subQuestion" data-q="40">40</div>
+                </div>
+            </div>
+            
+            <button class="footer__deliverButton___3FM07" id="submit-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Submit
+            </button>
+        </div>
+        
+        <div class="nav-arrows">
+            <button class="nav-arrow" id="prev-btn" disabled>←</button>
+            <button class="nav-arrow" id="next-btn">→</button>
+        </div>
+        
+        <div class="footer-credit">
+            IELTS Reading Practice Test
+        </div>
     </div>
-
-    <!-- Navigation Arrows -->
-    <div class="nav-arrows">
-        <button class="nav-arrow" onclick="previousQuestion()" id="prevBtn">‹</button>
-        <button class="nav-arrow" onclick="nextQuestion()" id="nextBtn">›</button>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="nav-row">
-        <div class="footer__questionWrapper___1tZ46 selected" role="tablist">
-            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(1)">
-                <span>
-                    <span class="sectionNr" aria-hidden="true">1</span>
-                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
-                </span>
-            </button>
-            <div class="footer__subquestionWrapper___9GgoP">
-                <button class="subQuestion" onclick="goToQuestion(1)">1</button>
-                <button class="subQuestion" onclick="goToQuestion(2)">2</button>
-                <button class="subQuestion" onclick="goToQuestion(3)">3</button>
-                <button class="subQuestion" onclick="goToQuestion(4)">4</button>
-                <button class="subQuestion" onclick="goToQuestion(5)">5</button>
-                <button class="subQuestion" onclick="goToQuestion(6)">6</button>
-                <button class="subQuestion" onclick="goToQuestion(7)">7</button>
-                <button class="subQuestion" onclick="goToQuestion(8)">8</button>
-                <button class="subQuestion" onclick="goToQuestion(9)">9</button>
-                <button class="subQuestion" onclick="goToQuestion(10)">10</button>
-            </div>
-        </div>
-        
-        <div class="footer__questionWrapper___1tZ46" role="tablist">
-            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(2)">
-                <span>
-                    <span class="sectionNr" aria-hidden="true">2</span>
-                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
-                </span>
-            </button>
-            <div class="footer__subquestionWrapper___9GgoP">
-                <button class="subQuestion" onclick="goToQuestion(11)">11</button>
-                <                <button class="subQuestion" onclick="goToQuestion(12)">12</button>
-                <button class="subQuestion" onclick="goToQuestion(13)">13</button>
-                <button class="subQuestion" onclick="goToQuestion(14)">14</button>
-                <button class="subQuestion" onclick="goToQuestion(15)">15</button>
-                <button class="subQuestion" onclick="goToQuestion(16)">16</button>
-                <button class="subQuestion" onclick="goToQuestion(17)">17</button>
-                <button class="subQuestion" onclick="goToQuestion(18)">18</button>
-                <button class="subQuestion" onclick="goToQuestion(19)">19</button>
-                <button class="subQuestion" onclick="goToQuestion(20)">20</button>
-            </div>
-        </div>
-        
-        <div class="footer__questionWrapper___1tZ46" role="tablist">
-            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(3)">
-                <span>
-                    <span class="sectionNr" aria-hidden="true">3</span>
-                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
-                </span>
-            </button>
-            <div class="footer__subquestionWrapper___9GgoP">
-                <button class="subQuestion" onclick="goToQuestion(21)">21</button>
-                <button class="subQuestion" onclick="goToQuestion(22)">22</button>
-                <button class="subQuestion" onclick="goToQuestion(23)">23</button>
-                <button class="subQuestion" onclick="goToQuestion(24)">24</button>
-                <button class="subQuestion" onclick="goToQuestion(25)">25</button>
-                <button class="subQuestion" onclick="goToQuestion(26)">26</button>
-                <button class="subQuestion" onclick="goToQuestion(27)">27</button>
-                <button class="subQuestion" onclick="goToQuestion(28)">28</button>
-                <button class="subQuestion" onclick="goToQuestion(29)">29</button>
-                <button class="subQuestion" onclick="goToQuestion(30)">30</button>
-            </div>
-        </div>
-        
-        <div class="footer__questionWrapper___1tZ46" role="tablist">
-            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(4)">
-                <span>
-                    <span class="sectionNr" aria-hidden="true">4</span>
-                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
-                </span>
-            </button>
-            <div class="footer__subquestionWrapper___9GgoP">
-                <button class="subQuestion" onclick="goToQuestion(31)">31</button>
-                <button class="subQuestion" onclick="goToQuestion(32)">32</button>
-                <button class="subQuestion" onclick="goToQuestion(33)">33</button>
-                <button class="subQuestion" onclick="goToQuestion(34)">34</button>
-                <button class="subQuestion" onclick="goToQuestion(35)">35</button>
-                <button class="subQuestion" onclick="goToQuestion(36)">36</button>
-                <button class="subQuestion" onclick="goToQuestion(37)">37</button>
-                <button class="subQuestion" onclick="goToQuestion(38)">38</button>
-                <button class="subQuestion" onclick="goToQuestion(39)">39</button>
-                <button class="subQuestion" onclick="goToQuestion(40)">40</button>
-            </div>
-        </div>
-        
-        <button id="deliver-button" class="footer__deliverButton___3FM07">
-            <span>Check Answers</span>
-        </button>
-    </nav>
 
     <script>
-    // --- STATE VARIABLES ---
-    let currentPassage = 1;
-    let currentQuestion = 1;
-    let timeInSeconds = 3600;
-    let timerInterval;
-    let activeQuestionElement = null;
+        // Timer functionality
+        let timerInterval;
+        let timeLeft = 60 * 60; // 60 minutes in seconds
+        const timerDisplay = document.querySelector('.timer-display');
+        const timerToggleBtn = document.getElementById('timer-toggle-btn');
+        const timerResetBtn = document.getElementById('timer-reset-btn');
+        let isTimerRunning = true;
 
-    // --- ANSWER KEY ---
-    const correctAnswers = {
-        '1': 'parent', '2': '85', '3': 'certificate', '4': 'lifejacket', 
-        '5': 'waterproof', '6': 'sandals', '7': 'map', '8': 'clubhouse', 
-        '9': 'doctor', '10': 'photos',
-        '11': 'C', '12': 'A', '13': 'B', '14': 'C', '15': 'C',
-        '16': 'suncream', '17': 'mobile phone', '18': 'streams', 
-        '19': 'mosquitoes', '20': 'honey',
-        '21': 'B', '22': 'A', '23': 'A', '24': 'C',
-        '25-26': ['D', 'E'], '27-28': ['B', 'D'], '29-30': ['B', 'D'],
-        '31': 'predictable', '32': 'mountains', '33': 'camels',
-        '34': 'some', '35': 'malnourished', '36': 'goods',
-        '37': 'clothing', '38': 'harvest', '39': 'tents',
-        '40': 'semi-nomadic'
-    };
-
-    // --- INITIALIZATION ---
-    document.addEventListener('DOMContentLoaded', () => {
-        startTimer();
-        switchToPart(1);
-        updateNavigation();
-        
-        document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
-        document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
-        document.getElementById('deliver-button').addEventListener('click', checkAnswers);
-        
-        document.getElementById('resizer').addEventListener('mousedown', initResize);
-        
-        document.body.addEventListener('input', updateAllIndicators);
-        document.body.addEventListener('change', updateAllIndicators);
-    });
-
-    // --- TEST FUNCTIONS ---
-    function switchToPart(partNumber) {
-        currentPassage = partNumber;
-        document.querySelectorAll('.reading-passage, .question-set, .part-header, .footer__questionWrapper___1tZ46').forEach(el => {
-            el.classList.add('hidden');
-            el.classList.remove('selected');
-        });
-        
-        document.getElementById(`passage-text-${partNumber}`)?.classList.remove('hidden');
-        document.getElementById(`questions-${partNumber}`)?.classList.remove('hidden');
-        document.getElementById(`part-header-${partNumber}`)?.classList.remove('hidden');
-        document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${partNumber})`)?.classList.remove('hidden');
-        document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${partNumber})`)?.classList.add('selected');
-        
-        const firstQuestion = {1: 1, 2: 11, 3: 21, 4: 31}[partNumber];
-        goToQuestion(firstQuestion);
-    }
-
-    function goToQuestion(questionNumber) {
-        currentQuestion = questionNumber;
-        
-        if (activeQuestionElement) {
-            activeQuestionElement.classList.remove('active-question', 'active-input');
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
-        
-        // Find the input element for this question
-        let targetEl = document.getElementById(`q${questionNumber}`);
-        
-        // For radio/checkbox questions, find the container
-        if (!targetEl) {
-            targetEl = document.querySelector(`[name="q${questionNumber}"]`)?.closest('.tf-question') || 
-                      document.querySelector(`[name="q${questionNumber}"]`)?.closest('.question');
-        }
-        
-        // For questions 25-30 which have grouped names
-        if (!targetEl && questionNumber >= 25 && questionNumber <= 30) {
-            const groupName = questionNumber <= 26 ? 'q25-26' : 
-                            (questionNumber <= 28 ? 'q27-28' : 'q29-30');
-            targetEl = document.querySelector(`[name="${groupName}"]`)?.closest('.question');
-        }
-        
-        if (targetEl) {
-            activeQuestionElement = targetEl;
-            if (targetEl.matches('input, select')) {
-                targetEl.classList.add('active-input');
-                targetEl.focus();
-            } else {
-                targetEl.classList.add('active-question');
-            }
-            scrollIntoViewIfNeeded(targetEl);
-        }
-        
-        updateNavigation();
-    }
 
-    function scrollIntoViewIfNeeded(element) {
-        const panel = element.closest('.questions-panel, .passage-panel');
-        const panelRect = panel.getBoundingClientRect();
-        const elementRect = element.getBoundingClientRect();
-        
-        if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                }
+            }, 1000);
         }
-    }
 
-    function updateNavigation() {
-        document.querySelectorAll('.subQuestion').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        document.querySelector(`.subQuestion[onclick="goToQuestion(${currentQuestion})"]`)?.classList.add('active');
-        
-        document.getElementById('prevBtn').disabled = currentQuestion === 1;
-        document.getElementById('nextBtn').disabled = currentQuestion === 40;
-        
-        // Update which part is active based on current question
-        let activePart = 1;
-        if (currentQuestion >= 11 && currentQuestion <= 20) activePart = 2;
-        else if (currentQuestion >= 21 && currentQuestion <= 30) activePart = 3;
-        else if (currentQuestion >= 31) activePart = 4;
-        
-        document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => {
-            wrapper.classList.toggle('selected', index + 1 === activePart);
-        });
-    }
-
-    function previousQuestion() {
-        if (currentQuestion > 1) {
-            goToQuestion(currentQuestion - 1);
-        }
-    }
-
-    function nextQuestion() {
-        if (currentQuestion < 40) {
-            goToQuestion(currentQuestion + 1);
-        }
-    }
-
-    // --- TIMER FUNCTIONS ---
-    function startTimer() {
-        if (timerInterval) clearInterval(timerInterval);
-        timerInterval = setInterval(() => {
-            timeInSeconds--;
-            const minutes = Math.floor(timeInSeconds / 60);
-            const seconds = timeInSeconds % 60;
-            document.querySelector('.timer-display').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeInSeconds <= 0) {
+        function toggleTimer() {
+            if (isTimerRunning) {
                 clearInterval(timerInterval);
-                document.querySelector('.timer-display').textContent = "Time's up!";
+                timerToggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+            } else {
+                startTimer();
+                timerToggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
             }
-        }, 1000);
-        document.getElementById('timer-toggle-btn').innerHTML = 
-            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-    }
-
-    function pauseTimer() {
-        clearInterval(timerInterval);
-        document.getElementById('timer-toggle-btn').innerHTML = 
-            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
-    }
-
-    function toggleTimer() {
-        if (timerInterval) {
-            pauseTimer();
-        } else {
-            startTimer();
+            isTimerRunning = !isTimerRunning;
         }
-    }
 
-    function resetTimer() {
-        pauseTimer();
-        timeInSeconds = 3600;
-        document.querySelector('.timer-display').textContent = '60:00';
-    }
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 60 * 60;
+            updateTimerDisplay();
+            if (isTimerRunning) {
+                startTimer();
+            }
+        }
 
-    // --- ANSWER CHECKING ---
-    function checkAnswers() {
-        pauseTimer();
-        let score = 0;
-        
-        // Clear previous markings
-        document.querySelectorAll('.correct, .incorrect').forEach(el => {
-            el.classList.remove('correct', 'incorrect');
-        });
-        
-        // Check each question
-        for (let qNum = 1; qNum <= 40; qNum++) {
-            const correctAnswer = correctAnswers[qNum];
-            let userAnswer = '';
-            let isCorrect = false;
+        timerToggleBtn.addEventListener('click', toggleTimer);
+        timerResetBtn.addEventListener('click', resetTimer);
+
+        // Start the timer initially
+        startTimer();
+
+        // Section navigation
+        let currentSection = 1;
+        const totalSections = 4;
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function updateSectionNavigation() {
+            prevBtn.disabled = currentSection === 1;
+            nextBtn.disabled = currentSection === totalSections;
             
-            // Handle different question types
-            if (qNum >= 25 && qNum <= 30) {
-                // Grouped checkbox questions (25-26, 27-28, 29-30)
-                const groupName = qNum <= 26 ? 'q25-26' : 
-                                (qNum <= 28 ? 'q27-28' : 'q29-30');
-                const checkedBoxes = Array.from(document.querySelectorAll(`input[name="${groupName}"]:checked`))
-                    .map(el => el.value);
-                isCorrect = arraysEqual(checkedBoxes.sort(), correctAnswer.sort());
+            // Update active section in footer
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach(wrapper => {
+                wrapper.classList.remove('selected');
+                if (parseInt(wrapper.dataset.section) === currentSection) {
+                    wrapper.classList.add('selected');
+                }
+            });
+            
+            // Show/hide passage and question sections
+            document.querySelectorAll('.reading-passage').forEach(passage => {
+                passage.classList.add('hidden');
+            });
+            document.getElementById(`passage-text-${currentSection}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.question-set').forEach(questionSet => {
+                questionSet.classList.add('hidden');
+            });
+            document.getElementById(`questions-${currentSection}`).classList.remove('hidden');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSection > 1) {
+                currentSection--;
+                updateSectionNavigation();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSection < totalSections) {
+                currentSection++;
+                updateSectionNavigation();
+            }
+        });
+
+        // Footer section navigation
+        document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach(wrapper => {
+            wrapper.addEventListener('click', (e) => {
+                if (e.target.closest('.footer__questionNo___3WNct')) {
+                    currentSection = parseInt(wrapper.dataset.section);
+                    updateSectionNavigation();
+                }
+            });
+        });
+
+        // Sub-question navigation
+        document.querySelectorAll('.subQuestion').forEach(subQ => {
+            subQ.addEventListener('click', () => {
+                const questionNum = parseInt(subQ.dataset.q);
+                let section;
                 
-                // Mark all checkboxes in group
-                document.querySelectorAll(`input[name="${groupName}"]`).forEach(el => {
-                    const container = el.closest('.tf-option');
-                    if (correctAnswer.includes(el.value)) {
-                        container.classList.add('correct');
-                    } else if (el.checked && !correctAnswer.includes(el.value)) {
-                        container.classList.add('incorrect');
+                if (questionNum <= 10) section = 1;
+                else if (questionNum <= 20) section = 2;
+                else if (questionNum <= 30) section = 3;
+                else section = 4;
+                
+                if (currentSection !== section) {
+                    currentSection = section;
+                    updateSectionNavigation();
+                }
+                
+                // Scroll to the question
+                const questionElement = document.querySelector(`[data-q-start="${questionNum}"]`);
+                if (questionElement) {
+                    questionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                
+                // Update active sub-question
+                document.querySelectorAll('.subQuestion').forEach(sq => {
+                    sq.classList.remove('active');
+                });
+                subQ.classList.add('active');
+            });
+        });
+
+        // Resizer functionality
+        const resizer = document.getElementById('resizer');
+        const passagePanel = document.getElementById('passage-panel');
+        const questionsPanel = document.getElementById('questions-panel');
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.style.cursor = 'col-resize';
+            document.addEventListener('mousemove', resize);
+            document.addEventListener('mouseup', stopResize);
+        });
+
+        function resize(e) {
+            if (!isResizing) return;
+            
+            const containerWidth = document.querySelector('.panels-container').offsetWidth;
+            const newPassageWidth = e.clientX - passagePanel.getBoundingClientRect().left;
+            const newQuestionsWidth = containerWidth - newPassageWidth - resizer.offsetWidth;
+            
+            if (newPassageWidth > 200 && newQuestionsWidth > 200) {
+                passagePanel.style.flex = '0 0 ' + newPassageWidth + 'px';
+                questionsPanel.style.flex = '0 0 ' + newQuestionsWidth + 'px';
+            }
+        }
+
+        function stopResize() {
+            isResizing = false;
+            document.body.style.cursor = '';
+            document.removeEventListener('mousemove', resize);
+        }
+
+        // Highlight functionality
+        let selectedText = '';
+        const highlightToolbar = document.getElementById('highlight-toolbar');
+        const highlightBtn = document.getElementById('highlight-btn');
+
+        document.addEventListener('mouseup', (e) => {
+            const selection = window.getSelection();
+            if (selection.toString().length > 0 && !e.target.closest('#highlight-toolbar')) {
+                selectedText = selection.toString();
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+                
+                highlightToolbar.style.display = 'block';
+                highlightToolbar.style.top = (rect.top + window.scrollY - 40) + 'px';
+                highlightToolbar.style.left = (rect.left + window.scrollX + rect.width / 2 - 50) + 'px';
+            } else if (!e.target.closest('#highlight-toolbar')) {
+                highlightToolbar.style.display = 'none';
+            }
+        });
+
+        highlightBtn.addEventListener('click', () => {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.textContent = selectedText;
+                range.deleteContents();
+                range.insertNode(span);
+                selection.removeAllRanges();
+                highlightToolbar.style.display = 'none';
+            }
+        });
+
+        // Answer tracking
+        document.querySelectorAll('.answer-input, input[type="radio"], input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', function() {
+                let questionNum;
+                
+                if (this.type === 'radio' || this.type === 'checkbox') {
+                    questionNum = this.name.replace('q', '').replace('-', '');
+                } else {
+                    questionNum = this.id.replace('q', '');
+                }
+                
+                // Mark as answered in footer
+                document.querySelectorAll(`.subQuestion[data-q="${questionNum}"]`).forEach(subQ => {
+                    if ((this.type === 'text' && this.value.trim() !== '') || 
+                        (this.type === 'radio' && this.checked) ||
+                        (this.type === 'checkbox' && this.checked)) {
+                        subQ.classList.add('answered');
+                    } else {
+                        subQ.classList.remove('answered');
                     }
                 });
-                
-                if (isCorrect) score += 2; // Each grouped question is worth 2 points
-            } else {
-                // Single answer questions
-                const inputEl = document.getElementById(`q${qNum}`);
-                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
-                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
-                
-                if (inputEl) {
-                    userAnswer = inputEl.value.trim().toLowerCase();
-                    isCorrect = userAnswer === correctAnswer.toLowerCase();
-                    if (isCorrect) {
-                        inputEl.classList.add('correct');
-                        score++;
-                    } else if (userAnswer) {
-                        inputEl.classList.add('incorrect');
-                    }
-                } else if (radioEl) {
-                    userAnswer = radioEl.value;
-                    isCorrect = userAnswer === correctAnswer;
-                    const container = radioEl.closest('.tf-option');
-                    if (isCorrect) {
-                        container.classList.add('correct');
-                        score++;
-                    } else if (userAnswer) {
-                        container.classList.add('incorrect');
-                    }
-                } else if (selectEl) {
-                    userAnswer = selectEl.value;
-                    isCorrect = userAnswer === correctAnswer;
-                    if (isCorrect) {
-                        selectEl.classList.add('correct');
-                        score++;
-                    } else if (userAnswer) {
-                        selectEl.classList.add('incorrect');
-                    }
-                }
-            }
-        }
-        
-        // Show results
-        alert(`You scored ${score} out of 40.`);
-        
-        // Disable further answering
-        document.querySelectorAll('input, select').forEach(el => {
-            el.disabled = true;
+            });
         });
-        document.getElementById('deliver-button').disabled = true;
-    }
 
-    function arraysEqual(a, b) {
-        if (a.length !== b.length) return false;
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] !== b[i]) return false;
-        }
-        return true;
-    }
-
-    // --- PANEL RESIZING ---
-    function initResize(e) {
-        e.preventDefault();
-        const startX = e.clientX;
-        const startWidth = document.getElementById('passage-panel').offsetWidth;
-        
-        function doDrag(e) {
-            const newWidth = startWidth + e.clientX - startX;
-            if (newWidth > 200 && (document.body.clientWidth - newWidth - 10) > 200) {
-                document.getElementById('passage-panel').style.flex = `0 0 ${newWidth}px`;
-            }
-        }
-        
-        function stopDrag() {
-            window.removeEventListener('mousemove', doDrag, false);
-            window.removeEventListener('mouseup', stopDrag, false);
-        }
-        
-        window.addEventListener('mousemove', doDrag, false);
-        window.addEventListener('mouseup', stopDrag, false);
-    }
-
-    // --- ANSWER TRACKING ---
-    function updateAllIndicators() {
-        updateAnsweredIndicators();
-        updateAttemptedCounts();
-    }
-
-    function updateAnsweredIndicators() {
-        for (let qNum = 1; qNum <= 40; qNum++) {
-            const btn = document.querySelector(`.subQuestion[onclick="goToQuestion(${qNum})"]`);
-            if (!btn) continue;
-            
-            let isAnswered = false;
-            
-            // Handle different question types
-            if (qNum >= 25 && qNum <= 30) {
-                const groupName = qNum <= 26 ? 'q25-26' : 
-                                (qNum <= 28 ? 'q27-28' : 'q29-30');
-                isAnswered = document.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
-            } else {
-                const inputEl = document.getElementById(`q${qNum}`);
-                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
-                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
+        // Submit button
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to submit your answers?')) {
+                // Here you would normally send answers to server
+                alert('Answers submitted!');
                 
-                isAnswered = (inputEl && inputEl.value.trim() !== '') || 
-                            radioEl || 
-                            (selectEl && selectEl.value !== '');
+                // For demo purposes, just show correct answers
+                showAnswers();
             }
-            
-            btn.classList.toggle('answered', isAnswered);
-        }
-    }
+        });
 
-    function updateAttemptedCounts() {
-        const partCounts = {1: 0, 2: 0, 3: 0, 4: 0};
-        
-        for (let qNum = 1; qNum <= 40; qNum++) {
-            const part = qNum <= 10 ? 1 : 
-                        (qNum <= 20 ? 2 : 
-                        (qNum <= 30 ? 3 : 4));
+        // Show correct answers (for demo)
+        function showAnswers() {
+            // Section 1 answers
+            document.getElementById('q1').value = 'parents';
+            document.getElementById('q2').value = '85';
+            document.getElementById('q3').value = 'certificate';
+            document.getElementById('q4').value = 'lifejacket';
+            document.getElementById('q5').value = 'waterproof';
+            document.getElementById('q6').value = 'sandals';
+            document.getElementById('q7').value = 'map';
+            document.getElementById('q8').value = 'clubhouse';
+            document.getElementById('q9').value = 'doctor';
+            document.getElementById('q10').value = 'photos';
             
-            let isAnswered = false;
+            // Section 2 answers
+            document.querySelector('input[name="q11"][value="C"]').checked = true;
+            document.getElementById('q12').value = 'A';
+            document.getElementById('q13').value = 'B';
+            document.getElementById('q14').value = 'C';
+            document.getElementById('q15').value = 'C';
+            document.getElementById('q16').value = 'sunscreen';
+            document.getElementById('q17').value = 'mobile phone';
+            document.getElementById('q18').value = 'streams';
+            document.getElementById('q19').value = 'mosquitoes';
+            document.getElementById('q20').value = 'honey';
             
-            if (qNum >= 25 && qNum <= 30) {
-                const groupName = qNum <= 26 ? 'q25-26' : 
-                                (qNum <= 28 ? 'q27-28' : 'q29-30');
-                isAnswered = document.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
-            } else {
-                const inputEl = document.getElementById(`q${qNum}`);
-                const radioEl = document.querySelector(`input[name="q${qNum}"]:checked`);
-                const selectEl = document.querySelector(`select[id="q${qNum}"]`);
-                
-                isAnswered = (inputEl && inputEl.value.trim() !== '') || 
-                            radioEl || 
-                            (selectEl && selectEl.value !== '');
-            }
+            // Section 3 answers
+            document.querySelector('input[name="q21"][value="C"]').checked = true;
+            document.querySelector('input[name="q22"][value="A"]').checked = true;
+            document.querySelector('input[name="q23"][value="B"]').checked = true;
+            document.querySelector('input[name="q24"][value="B"]').checked = true;
             
-            if (isAnswered) partCounts[part]++;
+            document.querySelectorAll('input[name="q25-26"]').forEach(cb => {
+                if (['C', 'E'].includes(cb.value)) cb.checked = true;
+            });
+            
+            document.querySelectorAll('input[name="q27-28"]').forEach(cb => {
+                if (['B', 'D'].includes(cb.value)) cb.checked = true;
+            });
+            
+            document.querySelectorAll('input[name="q29-30"]').forEach(cb => {
+                if (['B', 'D'].includes(cb.value)) cb.checked = true;
+            });
+            
+            // Section 4 answers
+            document.getElementById('q31').value = 'regular';
+            document.getElementById('q32').value = 'mountains';
+            document.getElementById('q33').value = 'camels';
+            document.getElementById('q34').value = 'some';
+            document.getElementById('q35').value = 'farmers';
+            document.getElementById('q36').value = 'goods';
+            document.getElementById('q37').value = 'clothing';
+            document.getElementById('q38').value = 'harvest';
+            document.getElementById('q39').value = 'tents';
+            document.getElementById('q40').value = 'semi-nomadic';
+            
+            // Mark all as answered
+            document.querySelectorAll('.subQuestion').forEach(subQ => {
+                subQ.classList.add('answered');
+            });
         }
-        
-        // Update counts for each part
-        for (let part = 1; part <= 4; part++) {
-            const countDisplay = document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${part}) .attemptedCount`);
-            if (countDisplay) {
-                countDisplay.textContent = `${partCounts[part]} of ${part === 4 ? 10 : 10}`;
-            }
-        }
-    }
+
+        // Initialize
+        updateSectionNavigation();
     </script>
 </body>
 </html>
