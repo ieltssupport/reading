@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Practice Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .hidden { display: none; }
+        .reading-passage {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .question-group {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question-prompt {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .question-item {
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .mcq-options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .mcq-options li {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #f0f8ff;
+            border-radius: 4px;
+        }
+        .navigation-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        #progress-container {
+            width: 100%;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        #progress-bar {
+            height: 10px;
+            background-color: #3498db;
+            border-radius: 5px;
+            width: 33%;
+            transition: width 0.5s ease;
+        }
+        .timer {
+            text-align: right;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            background-color: #fffde7;
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer">Time remaining: <span id="time">60:00</span></div>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <h2>IELTS Academic Reading Practice Test</h2>
+
+    <!-- Passage 1 -->
+    <div id="passage-text-1" class="reading-passage">
+        <h3>The Invention of the Printing Press</h3>
+        <p>The printing press, invented by Johannes Gutenberg in the mid-15th century, revolutionized the way information was shared in Europe. Before this invention, books were painstakingly copied by hand, making them rare and expensive. Gutenberg's innovation combined several existing technologies: movable type, oil-based ink, and a modified wine press.</p>
+        
+        <p>The first major book printed using this system was the Gutenberg Bible in 1455. This 42-line Bible marked the beginning of the "Gutenberg Revolution" and the era of mass communication. The printing press enabled the rapid spread of Renaissance ideas, scientific discoveries, and religious reforms across Europe.</p>
+        
+        <p>Historians estimate that by 1500, printing presses in operation throughout Western Europe had already produced more than twenty million volumes. This technological advancement played a key role in the development of the Renaissance, Reformation, and the Scientific Revolution.</p>
+    </div>
+
+    <!-- Questions for Passage 1 -->
+    <div class="question-group" data-q-start="1" data-q-end="7">
+        <div class="question-prompt">
+            <p>Questions 1-7</p>
+            <p>Do the following statements agree with the information given in the passage?</p>
+            <p>Write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
+        </div>
+        
+        <div class="question-item">
+            <p>1. The printing press made books more widely available.</p>
+            <select class="answer-dropdown">
+                <option value="">Select answer</option>
+                <option value="true">TRUE</option>
+                <option value="false">FALSE</option>
+                <option value="not-given">NOT GIVEN</option>
+            </select>
+        </div>
+        
+        <div class="question-item">
+            <p>2. Gutenberg invented movable type.</p>
+            <select class="answer-dropdown">
+                <option value="">Select answer</option>
+                <option value="true">TRUE</option>
+                <option value="false">FALSE</option>
+                <option value="not-given">NOT GIVEN</option>
+            </select>
+        </div>
+        
+        <!-- Additional questions 3-7 -->
+        <div class="question-item">
+            <p>3. The first printed book was a scientific text.</p>
+            <select class="answer-dropdown">
+                <option value="">Select answer</option>
+                <option value="true">TRUE</option>
+                <option value="false">FALSE</option>
+                <option value="not-given">NOT GIVEN</option>
+            </select>
+        </div>
+        
+        <div class="question-item">
+            <p>4. By 1500, Europe had printed over 20 million books.</p>
+            <select class="answer-dropdown">
+                <option value="">Select answer</option>
+                <option value="true">TRUE</option>
+                <option value="false">FALSE</option>
+                <option value="not-given">NOT GIVEN</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="question-group" data-q-start="8" data-q-end="13">
+        <div class="question-prompt">
+            <p>Questions 8-13</p>
+            <p>Complete the summary below using words from the passage.</p>
+        </div>
+        
+        <div class="question-item">
+            <p>The printing press, invented by <input type="text" size="15">, combined several existing technologies including <input type="text" size="15"> and a modified <input type="text" size="15">. The first major product of this invention was the <input type="text" size="15">, which had <input type="text" size="5"> lines per page.</p>
+        </div>
+    </div>
+
+    <!-- Passage 2 (hidden initially) -->
+    <div id="passage-text-2" class="reading-passage hidden">
+        <h3>The Digital Revolution</h3>
+        <p>The late 20th century saw the beginning of another information revolution with the advent of digital technology. The development of personal computers in the 1970s and 1980s, followed by the creation of the World Wide Web in 1989, transformed how people access and share information.</p>
+        
+        <p>Digital storage has made information more accessible than ever before. A single terabyte hard drive can store the equivalent of approximately 1.5 million books. The internet has enabled instant global communication, making geographical distance virtually irrelevant for information exchange.</p>
+        
+        <p>However, this digital revolution has also created new challenges. Issues of data privacy, information overload, and the digital divide between those with and without access to technology have become significant societal concerns. Additionally, the permanence of digital information raises questions about how future historians will process the vast amounts of data being created.</p>
+    </div>
+
+    <!-- Questions for Passage 2 -->
+    <div class="question-group hidden" data-q-start="14" data-q-end="20">
+        <div class="question-prompt">
+            <p>Questions 14-20</p>
+            <p>Choose the correct heading for each paragraph from the list of headings below.</p>
+        </div>
+        
+        <div class="question-item">
+            <p>14. Paragraph 1</p>
+            <select class="answer-dropdown">
+                <option value="">Select heading</option>
+                <option value="i">i. The origins of digital technology</option>
+                <option value="ii">ii. Comparing digital and print media</option>
+                <option value="iii">iii. The beginning of a new era</option>
+            </select>
+        </div>
+        
+        <div class="question-item">
+            <p>15. Paragraph 2</p>
+            <select class="answer-dropdown">
+                <option value="">Select heading</option>
+                <option value="i">i. Storage capacity advantages</option>
+                <option value="ii">ii. Problems with digital storage</option>
+                <option value="iii">iii. The future of information</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Passage 3 (hidden initially) -->
+    <div id="passage-text-3" class="reading-passage hidden">
+        <h3>The Future of Information Technology</h3>
+        <p>As we move further into the 21st century, several emerging technologies promise to transform how we interact with information. Artificial intelligence systems can now process and analyze data at speeds impossible for humans. Quantum computing, though still in its infancy, may eventually solve complex problems in seconds that would take current supercomputers years.</p>
+        
+        <p>One significant development is the growth of augmented reality (AR) technology. AR overlays digital information onto the physical world, potentially changing how we learn and interact with our environment. For instance, medical students might practice surgeries on virtual patients, or historians could walk through digitally reconstructed ancient cities.</p>
+        
+        <p>However, these advancements come with ethical considerations. The same technologies that can cure diseases might also be weaponized. The collection of personal data by corporations raises privacy concerns. As technology continues to advance, society will need to balance innovation with regulation to ensure these tools benefit humanity as a whole.</p>
+    </div>
+
+    <!-- Questions for Passage 3 -->
+    <div class="question-group hidden" data-q-start="21" data-q-end="26">
+        <div class="question-prompt">
+            <p>Questions 21-26</p>
+            <p>Choose the correct letter, A, B, C or D.</p>
+        </div>
+        
+        <div class="question-item">
+            <p>21. What is the main advantage of quantum computing mentioned in the passage?</p>
+            <ul class="mcq-options">
+                <li><input type="radio" name="q21" value="a"> A. It uses less electricity</li>
+                <li><input type="radio" name="q21" value="b"> B. It solves problems faster</li>
+                <li><input type="radio" name="q21" value="c"> C. It is smaller in size</li>
+                <li><input type="radio" name="q21" value="d"> D. It is already widely available</li>
+            </ul>
+        </div>
+        
+        <div class="question-item">
+            <p>22. According to the passage, how might augmented reality benefit medical students?</p>
+            <ul class="mcq-options">
+                <li><input type="radio" name="q22" value="a"> A. By reducing tuition costs</li>
+                <li><input type="radio" name="q22" value="b"> B. Through virtual surgery practice</li>
+                <li><input type="radio" name="q22" value="c"> C. By automating diagnoses</li>
+                <li><input type="radio" name="q22" value="d"> D. Through remote patient monitoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Navigation and Submission -->
+    <div class="navigation-container">
+        <button id="prev-btn" disabled>Previous</button>
+        <button id="next-btn">Next</button>
+        <button id="submit-btn" class="hidden">Submit Test</button>
+    </div>
+
+    <script>
+        // Test configuration
+        const testDuration = 60 * 60; // 60 minutes in seconds
+        let timeLeft = testDuration;
+        let currentPassage = 1;
+        const totalPassages = 3;
+        
+        // DOM elements
+        const timeDisplay = document.getElementById('time');
+        const progressBar = document.getElementById('progress-bar');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        // Timer function
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            if (timeLeft <= 0) {
+                endTest();
+            } else {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        
+        // Navigation functions
+        function showPassage(passageNum) {
+            // Hide all passages and questions
+            document.querySelectorAll('.reading-passage, .question-group').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show current passage and questions
+            document.getElementById(`passage-text-${passageNum}`).classList.remove('hidden');
+            document.querySelector(`.question-group[data-q-start="${passageNum === 1 ? '1' : passageNum === 2 ? '14' : '21'}"`).classList.remove('hidden');
+            
+            // Update buttons
+            prevBtn.disabled = passageNum === 1;
+            nextBtn.disabled = passageNum === totalPassages;
+            submitBtn.classList.toggle('hidden', passageNum !== totalPassages);
+            
+            // Update progress bar
+            progressBar.style.width = `${(passageNum / totalPassages) * 100}%`;
+        }
+        
+        function endTest() {
+            alert('Time is up! Your answers will be submitted automatically.');
+            submitAnswers();
+        }
+        
+        function submitAnswers() {
+            // In a real implementation, this would collect all answers and send to a server
+            console.log('Answers submitted!');
+            // Disable all inputs
+            document.querySelectorAll('select, input').forEach(el => {
+                el.disabled = true;
+            });
+            // Disable navigation
+            nextBtn.disabled = true;
+            prevBtn.disabled = true;
+            submitBtn.disabled = true;
+            
+            // Show results (in a real app, this would come from server)
+            alert('Test submitted! This would show your results in a real application.');
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            currentPassage++;
+            showPassage(currentPassage);
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentPassage--;
+            showPassage(currentPassage);
+        });
+        
+        submitBtn.addEventListener('click', submitAnswers);
+        
+        // Initialize
+        updateTimer();
+        showPassage(1);
+        
+        // Highlight functionality (bonus feature)
+        document.addEventListener('mouseup', function() {
+            const selection = window.getSelection();
+            if (selection.toString().length > 0) {
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                range.surroundContents(span);
+            }
+        });
+    </script>
+</body>
+</html>
